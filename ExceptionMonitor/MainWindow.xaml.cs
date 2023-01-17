@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Configuration;
 
 namespace ExceptionMonitor
 {
@@ -23,6 +24,32 @@ namespace ExceptionMonitor
         public MainWindow()
         {
             InitializeComponent();
+
+            //读取配置
+            var fileSavePath = ConfigurationManager.AppSettings["fileSavePath"];
+        }
+
+        // 运行程序
+        private void CheckBox_RunApp(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        // 设置开机自启动
+        private void CheckBox_Bootstrap(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        // 设置文件目录
+        private void Button_SetFilePath(object sender, RoutedEventArgs e)
+        {
+        }
+
+        // 打开文件目录
+        private void Button_OpenFilePath(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
