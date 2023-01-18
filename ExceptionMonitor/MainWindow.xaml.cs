@@ -128,6 +128,8 @@ namespace ExceptionMonitor
             var fileName = "screen_" + day + ".jpg";
             var screen = MainWindow.CaptureCurrentScreen();
             screen.Save(fileSavePath + "\\" + fileName);
+            screen.Dispose();
+            screen = null;
             Console.WriteLine(fileName);
         }
 
