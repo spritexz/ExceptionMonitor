@@ -5,22 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExceptionMonitor"
         mc:Ignorable="d"
-        Title="ExceptionMonitor" Height="350" Width="450" MinWidth="450" MinHeight="350" MaxWidth="450" MaxHeight="350" ResizeMode="NoResize">
+        Title="ExceptionMonitor" Height="350" Width="450" MinWidth="450" MinHeight="350" MaxWidth="450" MaxHeight="350" ResizeMode="CanMinimize">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="221*"/>
-            <ColumnDefinition Width="54*"/>
-            <ColumnDefinition Width="45*"/>
-            <ColumnDefinition Width="122*"/>
-        </Grid.ColumnDefinitions>
-        <CheckBox x:Name="bootstrap" Content="开机自启动" HorizontalAlignment="Left" Margin="31,53,0,0" VerticalAlignment="Top" Checked="CheckBox_Bootstrap" FontSize="20" BorderThickness="1" RenderTransformOrigin="0.5,0.5" Height="26" Padding="4,-1,0,0" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="timeInterval" HorizontalAlignment="Left" Height="32" Margin="167,88,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="148" FontSize="20" VerticalContentAlignment="Center" UndoLimit="19" Grid.ColumnSpan="3"/>
-        <Label Content="自动截图间隔(s):" HorizontalAlignment="Left" Margin="20,88,0,0" VerticalAlignment="Top" FontSize="18" Height="32" Width="155"/>
-        <Label Content="截图保存的目录:" HorizontalAlignment="Left" Margin="20,130,0,0" VerticalAlignment="Top" FontSize="18" Height="32" Width="155"/>
-        <TextBox x:Name="filePath" HorizontalAlignment="Left" Height="94" Margin="27,173,0,0" TextWrapping="Wrap" Text="D:\Work_Git\hxYouActIGuess\build\jsb-default" VerticalAlignment="Top" Width="382" FontSize="20" UndoLimit="19" Grid.ColumnSpan="4"/>
-        <Button x:Name="setFilePath" Content="设置目录" HorizontalAlignment="Left" Margin="167,129,0,0" VerticalAlignment="Top" Width="94" Height="35" FontSize="18" Grid.ColumnSpan="2" Click="Button_SetFilePath"/>
-        <Button x:Name="openFilePath" Content="打开目录" HorizontalAlignment="Left" Margin="4,129,0,0" VerticalAlignment="Top" Width="92" Height="35" FontSize="18" Grid.ColumnSpan="2" Grid.Column="2" Click="Button_OpenFilePath"/>
-        <CheckBox x:Name="runApp" Content="运行截图工具" Margin="31,18,10,0" VerticalAlignment="Top" Checked="CheckBox_RunApp" FontSize="20" BorderThickness="1" RenderTransformOrigin="0.5,0.5" Height="26" Padding="4,-1,0,0" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="timeInterval" HorizontalAlignment="Left" Height="32" Margin="172,24,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="248" FontSize="20" VerticalContentAlignment="Center" UndoLimit="19" Grid.ColumnSpan="6"/>
+        <Label Content="自动截图间隔(s):" HorizontalAlignment="Left" Margin="24,24,0,0" VerticalAlignment="Top" FontSize="18" Height="32" Width="154" Grid.ColumnSpan="2"/>
+        <Label Content="截图保存的目录:" HorizontalAlignment="Left" Margin="26,75,0,0" VerticalAlignment="Top" FontSize="18" Height="32" Width="154"/>
+        <Button x:Name="setFilePath" Content="设置目录" HorizontalAlignment="Left" Margin="172,74,0,0" VerticalAlignment="Top" Width="94" Height="34" FontSize="18" Grid.ColumnSpan="4" Click="Button_SetFilePath"/>
+        <Button x:Name="openFilePath" Content="打开目录" HorizontalAlignment="Left" Margin="289,74,0,0" VerticalAlignment="Top" Width="92" Height="34" FontSize="18" Click="Button_OpenFilePath"/>
+        <TextBox x:Name="filePath" HorizontalAlignment="Left" Height="98" Margin="32,126,0,0" TextWrapping="Wrap" Text="xxx" VerticalAlignment="Top" Width="388" FontSize="18" UndoLimit="19" Grid.ColumnSpan="6" Focusable="False"/>
+        <Button x:Name="runApp" Content="启动截图" HorizontalAlignment="Left" Margin="321,261,0,0" VerticalAlignment="Top" Width="99" Height="40" FontSize="20" Click="CheckBox_RunApp"/>
+        <Button x:Name="powerboot" Content="设为开机启动" HorizontalAlignment="Left" Margin="160,261,0,0" VerticalAlignment="Top" Width="141" Height="40" FontSize="20" Grid.ColumnSpan="5" Click="CheckBox_Bootstrap"/>
+        <Grid x:Name="gridPassword">
+            <Image HorizontalAlignment="Left" Height="321" VerticalAlignment="Top" Width="444" Source="icon/img_bg.png" Stretch="Fill"/>
+            <Label Content="请输入密码" HorizontalAlignment="Left" Margin="172,88,0,0" VerticalAlignment="Top" FontSize="20" />
+            <TextBox x:Name="inputPassword" HorizontalAlignment="Left" Height="38" Margin="123,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" VerticalContentAlignment="Center" FontSize="20">
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="TextDecorations">
+                            <Setter.Value>
+                                <TextDecorationCollection>
+                                    <TextDecoration>
+                                        <TextDecoration.Pen>
+                                            <Pen
+                                                    Brush="Black"
+                                                    DashCap="Round"
+                                                    EndLineCap="Round"
+                                                    StartLineCap="Round"
+                                                    Thickness="10">
+                                                <Pen.DashStyle>
+                                                    <DashStyle Dashes="0.0,1.2" Offset="0.6" />
+                                                </Pen.DashStyle>
+                                            </Pen>
+                                        </TextDecoration.Pen>
+                                        <TextDecoration.Location>
+                                            <TextDecorationLocation>Strikethrough</TextDecorationLocation>
+                                        </TextDecoration.Location>
+                                    </TextDecoration>
+                                </TextDecorationCollection>
+                            </Setter.Value>
 
+                        </Setter>
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Background" Value="#FF484D5E" />
+                        <Setter Property="Foreground" Value="Transparent" />
+                        <Setter Property="FontSize" Value="20" />
+                        <Setter Property="FontFamily" Value="Courier New" />
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Button x:Name="btnPassword" Content="确定" HorizontalAlignment="Left" Margin="172,186,0,0" VerticalAlignment="Top" Width="112" Height="42" FontSize="20" Click="BtnPassword_Click"/>
+        </Grid>
     </Grid>
 </Window>
