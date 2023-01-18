@@ -91,6 +91,9 @@ namespace ExceptionMonitor
                 this.isRun = true;
             }
             this.runApp.Content = this.isRun ? "停止截图" : "启动截图";
+
+            //启动后自动最小化
+            this.WindowState = WindowState.Minimized;
         }
 
         // 每秒更新的计时器
