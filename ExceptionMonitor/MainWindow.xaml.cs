@@ -94,6 +94,7 @@ namespace ExceptionMonitor
 
             //启动后自动最小化
             this.WindowState = WindowState.Minimized;
+            this.Hide();
         }
 
         // 每秒更新的计时器
