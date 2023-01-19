@@ -276,6 +276,11 @@ namespace ExceptionMonitor
             if (this.WindowState == WindowState.Minimized){
                 this.Hide();
             }
+            if (this.WindowState == WindowState.Maximized){
+                this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                gridPassword.Visibility = Visibility.Visible;
+                this.isUnlock = false;
+            }
         }
 
         /// <summary>
@@ -283,9 +288,6 @@ namespace ExceptionMonitor
         /// </summary>
         private void Window_Activated(object sender, EventArgs e)
         {
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            gridPassword.Visibility = Visibility.Visible;
-            this.isUnlock = false;
         }
 
         /// <summary>
