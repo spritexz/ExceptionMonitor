@@ -21,6 +21,7 @@ using System.IO;
 
 //using IWshRuntimeLibrary;
 using System.Diagnostics;
+using System.Drawing.Imaging;
 
 namespace ExceptionMonitor
 {
@@ -33,6 +34,11 @@ namespace ExceptionMonitor
         int nTimeInterval = 3;
         DateTime nLastRunTime = DateTime.Now;
         DispatcherTimer dispatcherTimer = null;
+
+        //获取JPEG的编解码器
+        public static ImageCodecInfo _Info_JPEG = GetEncoderInfo("image/jpeg");
+        public static System.Drawing.Imaging.Encoder encoder = System.Drawing.Imaging.Encoder.Quality;
+        public static EncoderParameter[] parameterList = new EncoderParameter[101];
 
         //是否解锁
         bool isUnlock = false;
@@ -123,13 +129,18 @@ namespace ExceptionMonitor
             }
             this.nLastRunTime = DateTime.Now;
             
-            //截图并保存
+            //截图
+            var screen = MainWindow.CaptureCurrentScreen();
+
+            //jpeg压缩处理
+            EncoderParameters encoderParameters = new EncoderParameters(1);  //创建一个编码信息数组并作为参数传入
+            encoderParameters.Param[0] = GetParameter(70L);  //获取画质为50时候的编码信息
+
+            //保存到文件
             var day = DateTime.Now.ToLocalTime().ToString("yyyy_MM_dd-hh_mm_ss");
             var fileName = "screen_" + day + ".jpg";
-            var screen = MainWindow.CaptureCurrentScreen();
-            screen.Save(fileSavePath + "\\" + fileName);
+            screen.Save(fileSavePath + "\\" + fileName, _Info_JPEG, encoderParameters);
             screen.Dispose();
-            screen = null;
             Console.WriteLine(fileName);
         }
 
@@ -244,6 +255,42 @@ namespace ExceptionMonitor
             }
 
             return bmpScreen;
+        }
+
+        //该方法根据指定的画质返回编码信息数组,这个数组在压缩JPEG时需要用到
+        public static EncoderParameters GetEncoderParameters(long value)
+        {
+            EncoderParameters encoderParameters = new EncoderParameters(1);
+            encoderParameters.Param[0] = GetParameter(value);
+            return encoderParameters;
+        }
+
+        //该方法根据参数返回包含指定画质的编码信息,value的范围是: [0,100]
+        public static EncoderParameter GetParameter(long value)
+        {
+            int v = (int)value;
+            //为了提高性能,可以将使用过的编码信息保存起来,仅当数组中没有时才重新获取
+            if (parameterList[v] == null)
+            {
+                parameterList[v] = new EncoderParameter(encoder, value);
+            }
+            return parameterList[v];
+        }
+
+        //获取图像编解码器
+        public static ImageCodecInfo GetEncoderInfo(string type)
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].MimeType == type)
+                {
+                    return encoders[j];
+                }
+            }
+            return null;
         }
 
         /// <summary>
